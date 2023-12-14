@@ -40,12 +40,14 @@ namespace snake
         private readonly Image[,] gridImages;
         private GameState gameState;
         private bool gameRunning;
+        private int highScore;
         public MainWindow()
         {
             InitializeComponent();
 
             gridImages = SetupGrid();
             gameState = new GameState(rows, cols);
+
         }
 
         private async Task GameLoop()
@@ -92,6 +94,7 @@ namespace snake
             await GameLoop();
             await ShowGameOver();
             gameState = new GameState(rows, cols);
+            
         }
 
         private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -138,6 +141,7 @@ namespace snake
             DrawGrid();
             DrawSnakeHead();
             ScoreText.Text = $"Score {gameState.Score}";
+            
         }
         private void DrawGrid()
         {
@@ -165,8 +169,15 @@ namespace snake
         {
             await DrawDeadSnake();
             await Task.Delay(1000);
+            
             Overlay.Visibility = Visibility.Visible;
             OverlayText.Text = "PRESS ANY KEY TO START";
+            if (gameState.Score > highScore)
+            {
+                highScore = gameState.Score;
+            }
+            HighScoreText.Text = $"High Score {highScore}";
+
         }
 
         private void DrawSnakeHead()
@@ -190,5 +201,7 @@ namespace snake
                 await Task.Delay(50);
             }
         }
+
+        
     }
 }

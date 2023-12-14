@@ -13,6 +13,7 @@ namespace snake
         public GridValue[,] Grid { get; }
         public Direction Dir { get; private set; }
         public int Score { get; private set; }
+        public int HighScore {  get; private set; }
         public bool GameOver { get; private set; }
 
         private readonly LinkedList<Direction> dirChanges = new();
@@ -168,6 +169,8 @@ namespace snake
                 AddFood();
             }
         }
+
+        
     }
     
 }

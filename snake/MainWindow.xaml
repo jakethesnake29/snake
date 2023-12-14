@@ -22,13 +22,20 @@
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="ScoreText"
-                   HorizontalAlignment="Center"
+                   HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    Text="SCORE 0"
                    FontSize="22"
                    Margin="10"/>
 
-        <Border x:Name="GridBorder"
+            <TextBlock x:Name="HighScoreText"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Text="HIGH SCORE 0"
+                   FontSize="22"
+                   Margin="10"/>
+
+            <Border x:Name="GridBorder"
                 Grid.Row="1"
                 BorderBrush="{StaticResource GridLineColor}"
                 BorderThickness="10"
