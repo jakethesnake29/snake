@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace snake
 {
@@ -47,7 +48,20 @@ namespace snake
 
             gridImages = SetupGrid();
             gameState = new GameState(rows, cols);
-
+            string fileName = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "highscore.txt");
+            if (File.Exists(fileName) )
+            {
+                StreamReader sr = new StreamReader(fileName);
+                highScore = int.Parse(sr.ReadLine());
+                sr.Close();
+                HighScoreText.Text = $"High Score {highScore}";
+            }
+            else
+            {
+                StreamWriter sw = new StreamWriter(fileName);
+                sw.WriteLine(highScore);
+                sw.Close();
+            }
         }
 
         private async Task GameLoop()
@@ -175,6 +189,9 @@ namespace snake
             if (gameState.Score > highScore)
             {
                 highScore = gameState.Score;
+                StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + "\\highscore.txt");
+                sw.WriteLine(highScore);
+                sw.Close();
             }
             HighScoreText.Text = $"High Score {highScore}";
 
