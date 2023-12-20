@@ -4,6 +4,7 @@
     {
         Empty,
         Snake,
+        Snake2,
         Food,
         Outside
 
